@@ -1,0 +1,45 @@
+<div [ngSwitch]="mode">
+    <div *ngSwitchCase="deleteMode">
+        <span class="delete"> DELETE DIRECT REPORT </span>
+        <p>
+            Permanently delete direct report {{ employee.firstName}}, {{employee.lastName}}?
+
+            This action cannot be undone.
+        </p>
+        <button (click)="Delete()" > OK </button>
+        <button (click)="close()" > CANCEL  </button>
+    </div>
+    <div *ngSwitchCase="EditMode">
+        <div class="edit">
+            <span> UPDATE COMPENSATION</span>
+            <form [formGroup]="employeeForm">
+                <tr>
+                    <legend for="firstName">First Name</legend>
+                    <input type="text" id="firstName" formControlName="firstName">
+                    <mat-error *ngIf="employeeForm.controls.firstName.errors?.required"> Required </mat-error>
+                    <mat-error *ngIf="employeeForm.controls.firstName.errors?.pattern"> Only Letters Allowed </mat-error>
+                </tr>
+                <tr>
+                    <legend for="lastName">Last Name</legend>
+                    <input type="text"  id="lastName" formControlName="lastName">
+                    <mat-error *ngIf="employeeForm.controls.lastName.errors?.required"> Required </mat-error>
+                    <mat-error *ngIf="employeeForm.controls.lastName.errors?.pattern"> Only Letters Allowed </mat-error>
+                </tr>
+                <tr>
+                    <legend for="firstName">Title</legend>
+                <input type="text" id="position" formControlName="position">
+                <mat-error *ngIf="employeeForm.controls.position.errors?.required"> Required </mat-error>
+                    <mat-error *ngIf="employeeForm.controls.position.errors?.pattern"> Only Letters Allowed </mat-error>
+                </tr>
+                <tr>
+                    <legend for="firstName">Compensation</legend>
+                <input type="text" id="compensation" formControlName="compensation">
+                <mat-error *ngIf="employeeForm.controls.compensation.errors?.required"> Required </mat-error>
+                <mat-error *ngIf="employeeForm.controls.compensation.errors?.pattern"> Only Numbers Allowed </mat-error>
+                </tr>
+            </form>
+            <button (click)="Edit()" [disabled]="!employeeForm.valid">SAVE</button>
+            <button (click)="close()" >CANCEL</button>
+        </div>
+    </div>
+</div>

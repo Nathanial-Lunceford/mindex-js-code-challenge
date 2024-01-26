@@ -1,0 +1,17 @@
+.name {
+    color:deepskyblue;
+    font-weight: bold;
+}
+
+.information {
+    font-weight: 500;
+}
+
+.employee {
+    width: 22rem;
+}
+
+.directreportcard {
+    display: block;
+    width: 22rem;
+}

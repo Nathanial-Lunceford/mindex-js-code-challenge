@@ -1,12 +1,21 @@
 <mat-card class="employee">
   <mat-card-header>
-    <mat-card-title>{{employee.lastName}}, {{employee.firstName}}</mat-card-title>
-    <mat-card-subtitle>{{employee.id}}</mat-card-subtitle>
+    <mat-card-title class="name">{{employee.lastName}}, {{employee.firstName}}: {{employee.position}}</mat-card-title>
+    <mat-card-subtitle class="information"> Employee ID: {{employee.id}} Compensation: {{employee.compensation}}</mat-card-subtitle>
+    <mat-card-subtitle class="information" *ngIf="employee.directReports"> Direct Reports: {{ employee.directReports ? employee.directReports.length : 0}} </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <dl>
-      <dt>Job Title</dt>
-      <dd>{{employee.position}}</dd>
-    </dl>
+    <table>
+      <tbody>
+        <tr *ngFor="let directreport of employee.directReports" class="directreportrow">
+          <!-- the IDs for employees start at 1, whereas the array of employees starts at 0. The "-1"'s you see are there to make sure the directreport references the correct employee.' -->
+          <div class="directreportcard" *ngIf="employees[directreport - 1] != null">
+            <p class="DirectReport" *ngIf="employees[directreport - 1]"> {{employees[directreport - 1].firstName}} {{employees[directreport - 1].lastName}}</p>
+            <button class="DELETEBUTTON" (click)="Delete(directreport - 1)" >DELETE</button>
+            <button class="EDITBUTTON" (click)="Edit(directreport - 1)">EDIT</button>
+        </div>
+        </tr>
+      </tbody>
+    </table>
   </mat-card-content>
 </mat-card>
